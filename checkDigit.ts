@@ -1,18 +1,8 @@
-type Digit = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
+import { Digit } from "./digit.ts";
+import { Tuple12 } from "./tuple.ts";
 
 export const computeCheckDigit = (
-  d1: Digit,
-  d2: Digit,
-  d3: Digit,
-  d4: Digit,
-  d5: Digit,
-  d6: Digit,
-  d7: Digit,
-  d8: Digit,
-  d9: Digit,
-  d10: Digit,
-  d11: Digit,
-  d12: Digit
+  ...[d1, d2, d3, d4, d5, d6, d7, d8, d9, d10, d11, d12]: Tuple12<Digit>
 ): Digit => {
   const evenSum = d2 + d4 + d6 + d8 + d10 + d12;
   const oddSum = d1 + d3 + d5 + d7 + d9 + d11;

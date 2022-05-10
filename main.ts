@@ -1,5 +1,5 @@
 import { reverse } from "./reverse.ts";
-import { F0 } from "./barcodeModule.ts";
+import { F0 } from "./evenParity1st.ts";
 
 const a = [1, 2, 3] as const;
 const b = reverse(a);

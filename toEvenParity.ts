@@ -11,7 +11,7 @@ export const toEvenParity = <
   M4 extends Mod,
   M5 extends Mod,
   M6 extends Mod,
-  M7 extends Mod
+  M7 extends Mod,
 >([m1, m2, m3, m4, m5, m6, m7]: readonly [M1, M2, M3, M4, M5, M6, M7]) =>
   [
     invert(m1),

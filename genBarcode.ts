@@ -1,9 +1,8 @@
 import { _, I, Mod } from "./barcodeModule.ts";
+import { computeCheckDigit } from "./checkDigit.ts";
 import { Digit } from "./digit.ts";
 import { toEvenParity } from "./toEvenParity.ts";
-import { Tuple12, Tuple6, Tuple7 } from "./tuple.ts";
-import { reverse } from "./reverse.ts";
-import { computeCheckDigit } from "./checkDigit.ts";
+import { Tuple12, Tuple6, Tuple7, mapTuple6, reverseTuple7 } from "./tuple.ts";
 
 type DataChar = Readonly<Tuple7<Mod>>;
 
@@ -24,19 +23,6 @@ const oddParity = {
   9: [_, _, _, I, _, I, I],
 } as const;
 
-const evenParity = {
-  0: toEvenParity(oddParity[0]),
-  1: toEvenParity(oddParity[1]),
-  2: toEvenParity(oddParity[2]),
-  3: toEvenParity(oddParity[3]),
-  4: toEvenParity(oddParity[4]),
-  5: toEvenParity(oddParity[5]),
-  6: toEvenParity(oddParity[6]),
-  7: toEvenParity(oddParity[7]),
-  8: toEvenParity(oddParity[8]),
-  9: toEvenParity(oddParity[9]),
-} as const;
-
 const whichParityToChange = {
   0: [],
   1: [2, 4, 5],
@@ -53,30 +39,22 @@ const whichParityToChange = {
 export const genBarcode = (
   ...d: Tuple12<Digit>
 ): [LeftDataChars, RightDataChars] => {
-  const oddParities: LeftDataChars = [
-    oddParity[d[1]],
-    oddParity[d[2]],
-    oddParity[d[3]],
-    oddParity[d[4]],
-    oddParity[d[5]],
-    oddParity[d[6]],
-  ];
+  const leftDataChars: LeftDataChars = mapTuple6(
+    [d[1], d[2], d[3], d[4], d[5], d[6]],
+    (digit) => oddParity[digit]
+  );
 
   const parityIndices = whichParityToChange[d[0]];
   for (const i of parityIndices) {
-    oddParities[i] = reverse(toEvenParity(oddParities[i]));
+    leftDataChars[i] = reverseTuple7(toEvenParity(leftDataChars[i]));
   }
 
   const checkDigit = computeCheckDigit(...d);
 
-  const evenParities: RightDataChars = [
-    evenParity[d[7]],
-    evenParity[d[8]],
-    evenParity[d[9]],
-    evenParity[d[10]],
-    evenParity[d[11]],
-    evenParity[checkDigit],
-  ];
+  const rightDataChars: RightDataChars = mapTuple6(
+    [d[7], d[8], d[9], d[10], d[11], checkDigit],
+    (digit) => toEvenParity(oddParity[digit])
+  );
 
-  return [oddParities, evenParities];
+  return [leftDataChars, rightDataChars];
 };

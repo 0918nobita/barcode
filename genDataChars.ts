@@ -2,13 +2,13 @@ import { _, I, Mod } from "./barcodeModule.ts";
 import { computeCheckDigit } from "./checkDigit.ts";
 import { Digit } from "./digit.ts";
 import { toEvenParity } from "./toEvenParity.ts";
-import { Tuple12, Tuple6, Tuple7, mapTuple6, reverseTuple7 } from "./tuple.ts";
+import { mapTuple6, reverseTuple7, Tuple12, Tuple6, Tuple7 } from "./tuple.ts";
 
 type DataChar = Readonly<Tuple7<Mod>>;
 
-type LeftDataChars = Tuple6<DataChar>;
+export type LeftDataChars = Tuple6<DataChar>;
 
-type RightDataChars = Tuple6<DataChar>;
+export type RightDataChars = Tuple6<DataChar>;
 
 const oddParity = {
   0: [_, _, _, I, I, _, I],
@@ -36,12 +36,12 @@ const whichParityToChange = {
   9: [1, 2, 4],
 } as const;
 
-export const genBarcode = (
+export const genDataChars = (
   ...d: Tuple12<Digit>
 ): [LeftDataChars, RightDataChars] => {
   const leftDataChars: LeftDataChars = mapTuple6(
     [d[1], d[2], d[3], d[4], d[5], d[6]],
-    (digit) => oddParity[digit]
+    (digit) => oddParity[digit],
   );
 
   const parityIndices = whichParityToChange[d[0]];
@@ -53,7 +53,7 @@ export const genBarcode = (
 
   const rightDataChars: RightDataChars = mapTuple6(
     [d[7], d[8], d[9], d[10], d[11], checkDigit],
-    (digit) => toEvenParity(oddParity[digit])
+    (digit) => toEvenParity(oddParity[digit]),
   );
 
   return [leftDataChars, rightDataChars];

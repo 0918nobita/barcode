@@ -45,7 +45,7 @@ export const render = (markup: Text | Tag | SelfClosingTag): string => {
       const attrsStr = Object.entries(attrs).map(([attr, value]) =>
         `${attr}="${value}"`
       ).join(" ");
-      const childrenStr = children.map(render).join("\n");
+      const childrenStr = children.map(render).join("");
       return `<${name} ${attrsStr}>${childrenStr}</${name}>`;
     }
 

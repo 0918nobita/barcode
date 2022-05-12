@@ -1,13 +1,4 @@
-import { computeCheckDigit } from "./checkDigit.ts";
-import { genBarcode } from "./genBarcode.ts";
 import { render, tag, tagS } from "./tag.ts";
-
-const digits = [0, 1, 2, 3, 4, 5, 6, 1, 2, 3, 4, 5] as const;
-const checkDigit = computeCheckDigit(...digits);
-console.log(checkDigit);
-
-const barcode = genBarcode(...digits);
-console.log(barcode);
 
 const svg = tag("svg", {
   version: "1.1",
@@ -17,12 +8,19 @@ const svg = tag("svg", {
   height: "22.86mm",
 }, [
   tagS("rect", {
+    x: "0",
+    y: "0",
+    width: "100%",
+    height: "100%",
+    fill: "white",
+  }),
+  tagS("rect", {
     x: "3.63mm",
     y: "0",
     width: "0.33mm",
     height: "100%",
     fill: "black",
-    stroke: "none",
   }),
 ]);
+console.log('<?xml version="1.0"?>');
 console.log(render(svg));

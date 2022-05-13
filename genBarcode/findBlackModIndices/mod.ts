@@ -1,4 +1,4 @@
-import { I, Mod } from "./barcodeModule.ts";
+import { I, Mod } from "../barcodeModule.ts";
 import { findIndices } from "./findIndices.ts";
 
 export const findBlackModIndices = (

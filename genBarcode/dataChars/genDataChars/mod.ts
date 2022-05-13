@@ -1,11 +1,11 @@
 import { pipe } from "https://deno.land/x/compose@1.3.2/index.js";
 
-import { _, I } from "./barcodeModule.ts";
+import { _, I } from "../../barcodeModule.ts";
 import { computeCheckDigit } from "./checkDigit.ts";
-import { LeftDataChars, RightDataChars } from "./dataChars.ts";
-import { Digit } from "./digit.ts";
+import { LeftDataChars, RightDataChars } from "../dataChars.ts";
+import { Digit } from "../../../digit.ts";
 import { toEvenParity } from "./toEvenParity.ts";
-import { mapTuple6, reverseTuple7, Tuple12 } from "./tuple.ts";
+import { mapTuple6, reverseTuple7, Tuple12 } from "../../../tuple.ts";
 
 const oddParity = {
   0: [_, _, _, I, I, _, I],

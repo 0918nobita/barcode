@@ -1,5 +1,5 @@
-import { _ } from "./barcodeModule.ts";
-import { ContiguousIndexGroup } from "./groupContiguousIndices.ts";
+import { _ } from "../barcodeModule.ts";
+import { ContiguousIndexGroup } from "../groupContiguousIndices.ts";
 import { render, tag, tagS } from "./tag.ts";
 
 export const renderBarcode = (

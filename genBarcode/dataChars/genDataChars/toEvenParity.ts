@@ -1,5 +1,5 @@
-import { _, I, Mod } from "./barcodeModule.ts";
-import { Tuple7, mapTuple7 } from "./tuple.ts";
+import { _, I, Mod } from "../../barcodeModule.ts";
+import { mapTuple7, Tuple7 } from "../../../tuple.ts";
 
 const invert = (m: Mod): Mod => (m === _ ? I : _);
 

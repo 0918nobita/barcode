@@ -1,5 +1,5 @@
-import { Mod } from "./barcodeModule.ts";
-import { Tuple6, Tuple7 } from "./tuple.ts";
+import { Mod } from "../barcodeModule.ts";
+import { Tuple6, Tuple7 } from "../../tuple.ts";
 
 type DataChar = Readonly<Tuple7<Mod>>;
 

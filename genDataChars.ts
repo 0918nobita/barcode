@@ -1,14 +1,11 @@
-import { _, I, Mod } from "./barcodeModule.ts";
+import { pipe } from "https://deno.land/x/compose@1.3.2/index.js";
+
+import { _, I } from "./barcodeModule.ts";
 import { computeCheckDigit } from "./checkDigit.ts";
+import { LeftDataChars, RightDataChars } from "./dataChars.ts";
 import { Digit } from "./digit.ts";
 import { toEvenParity } from "./toEvenParity.ts";
-import { mapTuple6, reverseTuple7, Tuple12, Tuple6, Tuple7 } from "./tuple.ts";
-
-type DataChar = Readonly<Tuple7<Mod>>;
-
-export type LeftDataChars = Tuple6<DataChar>;
-
-export type RightDataChars = Tuple6<DataChar>;
+import { mapTuple6, reverseTuple7, Tuple12 } from "./tuple.ts";
 
 const oddParity = {
   0: [_, _, _, I, I, _, I],
@@ -46,7 +43,7 @@ export const genDataChars = (
 
   const parityIndices = whichParityToChange[d[0]];
   for (const i of parityIndices) {
-    leftDataChars[i] = reverseTuple7(toEvenParity(leftDataChars[i]));
+    leftDataChars[i] = pipe(leftDataChars[i], toEvenParity, reverseTuple7);
   }
 
   const checkDigit = computeCheckDigit(...d);

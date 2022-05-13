@@ -9,3 +9,15 @@ Deno (TypeScript) で実装しています。
 ```bash
 echo "490136033585" | deno run main.ts > out.svg
 ```
+
+## インストール方法
+
+以下のように `deno install` コマンドを実行すると、この CLI ツールは `barcode` コマンドとしてインストールされます。
+
+```bash
+deno install --name barcode main.ts
+```
+
+```bash
+echo "490136033585" | barcode > out.svg
+```
